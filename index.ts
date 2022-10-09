@@ -6,7 +6,7 @@ const app = express();
 const PORT = process.env.PORT||3000;
 
 const getHTML = (list: Contributor[]): string => {
-    return `<div style="display:flex; gap:10px;justify-content:center;">`+list.map(item => (
+    return `\n<div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;">`+list.map(item => (
         `<a href=${item.html_url}>
             <img style="display:block;border-radius:50%;"  height=100 src=${item.avatar_url} alt=${item.login} title=${item.login} />
         </a>`
