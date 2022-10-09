@@ -1,9 +1,20 @@
 import express from 'express'
 import axios from 'axios'
 import Contributor from './types/ContributorType'
+import cors from "cors";
 
 const app = express();
 const PORT = process.env.PORT||3000;
+
+app.use(require("cors")());
+
+app.use(
+  cors({
+    origin: ["http://localhost:8000", "https://memories.ieeecsvitc.com/"],
+    credentials: true
+  })
+);
+
 
 const getHTML = (list: Contributor[]): string => {
     return `\n<div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;">`+list.map(item => (
