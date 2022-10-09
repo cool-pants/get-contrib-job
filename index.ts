@@ -1,12 +1,10 @@
 import express from 'express'
 import axios from 'axios'
 import Contributor from './types/ContributorType'
-import cors from "cors";
+import cors from 'cors';
 
 const app = express();
 const PORT = process.env.PORT||3000;
-
-app.use(cors);
 
 app.use(
   cors({
