@@ -5,9 +5,13 @@ import Contributor from './types/ContributorType'
 const app = express();
 const PORT = process.env.PORT||3000;
 
-type GetUsersResponse = {
-    data: Contributor[];
-};
+const getHTML = (list: Contributor[]): string[] => {
+    return list.map(item => (
+        `<a href=${item.html_url}>
+            <img style="display:block;border-radius:50%;"  height=100 src=${item.avatar_url} alt=${item.login} title=${item.login} />
+        </a>`
+    ))
+}
 
 app.get('/contributors/:owner/:repo', async (req:any,res:any) => {
     const url:string = ["https://api.github.com/repos",req.params.owner,req.params.repo,"contributors"].join("/")
@@ -27,7 +31,7 @@ app.get('/contributors/:owner/:repo', async (req:any,res:any) => {
         return
     }               
     
-    res.send(data.map(item => ({user: item.login, github:item.html_url, avatar:item.avatar_url})));
+    res.send(getHTML(data));
     } catch (error) {
         if (axios.isAxiosError(error)) {
             res.send(error.message);
