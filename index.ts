@@ -5,12 +5,12 @@ import Contributor from './types/ContributorType'
 const app = express();
 const PORT = process.env.PORT||3000;
 
-const getHTML = (list: Contributor[]): string[] => {
-    return list.map(item => (
+const getHTML = (list: Contributor[]): string => {
+    return `<div style="display:flex; gap:10px;justify-content:center;">`+list.map(item => (
         `<a href=${item.html_url}>
             <img style="display:block;border-radius:50%;"  height=100 src=${item.avatar_url} alt=${item.login} title=${item.login} />
         </a>`
-    ))
+    )).join(" ")+"</div>"
 }
 
 app.get('/contributors/:owner/:repo', async (req:any,res:any) => {
